@@ -15,4 +15,15 @@ class AppTest {
         assertTrue(input);
     }
 
+    @Test
+    public void exampleTest_AlwaysFails(){
+
+        // given
+        boolean input = false;
+
+        // when
+        // then
+        assertTrue(input);
+    }
+
 }
