@@ -12,7 +12,7 @@ class AppTest {
 
         // when
         // then
-        assertTrue(input);
+        assertTrue(input, "This test is an example and should always pass");
     }
 
     @Test
@@ -23,7 +23,7 @@ class AppTest {
 
         // when
         // then
-        assertTrue(input);
+        assertTrue(input, "This test is an example and should always fail");
     }
 
 }
