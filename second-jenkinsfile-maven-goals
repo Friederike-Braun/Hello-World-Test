@@ -14,6 +14,7 @@ pipeline{
     }
     stage ('Build') {
         steps {
+                    // -Dmaven.test.failure.ignore=true causes maven to ignore any failed tests & continue with further goals
                     sh 'mvn -Dmaven.test.failure.ignore=true clean validate test-compile test'
         }
         post {
