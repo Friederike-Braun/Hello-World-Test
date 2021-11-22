@@ -12,10 +12,15 @@ pipeline{
             echo "M2_HOME = /opt/maven"
         }
     }
-    stage('Hello'){
-      steps{
-        echo 'World'
-      }
+    stage ('Build') {
+        steps {
+                    sh 'mvn -Dmaven.test.failure.ignore=true clean validate test-compile test'
+        }
+        post {
+            success {
+                junit 'target/surefire-reports/**/*.xml'
+            }
+        }
     }
   }
 }
