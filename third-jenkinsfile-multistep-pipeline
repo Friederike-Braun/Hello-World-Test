@@ -10,23 +10,18 @@ pipeline{
         steps {
             sh 'mvn compile test-compile'
         }
-        post{
-            failure {
-                sh 'mvn clean'
-            }
-        }
     }
     stage ('Test') {
         steps {
             // -Dmaven.test.failure.ignore=true causes maven to ignore any failed tests & continue with further goals
-             sh 'mvn -Dmaven.test.failure.ignore=true test'
+            sh 'mvn -Dmaven.test.failure.ignore=true test'
         }
         post {
             always {
                 junit 'target/surefire-reports/**/*.xml'
             }
             unstable {
-                sh 'mvn clean'
+                //sh 'mvn clean'
                 error('Build unstable, at least one test failed. Aborting pipeline')
             }
         }
@@ -35,6 +30,11 @@ pipeline{
         steps {
             sh 'mvn clean -Dmaven.test.skip package'
         }
+    }
+  }
+  post{
+    failure {
+        sh 'mvn clean'
     }
   }
 }
