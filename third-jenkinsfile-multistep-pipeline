@@ -40,6 +40,8 @@ pipeline{
             }
             unstable {
                 echo "some tests failed"
+                sh 'mvn clean'
+                error('Aborting pipeline because tests failed')
             }
         }
     }
