@@ -1,0 +1,44 @@
+pipeline{
+  agent any
+  tools {
+          maven "3.6.3"
+          jdk "JDK-17"
+  }
+
+  stages{
+    stage('Initialize'){
+        steps{
+            echo "PATH = ${M2_HOME}/bin:${PATH}"
+            echo "M2_HOME = /opt/maven"
+        }
+    }
+    stage('Clean'){
+        echo "Maven clean"
+        //sh 'mvn clean'
+    }
+    stage('Build'){
+        echo "some build step"
+        //sh 'mvn compile'
+    }
+    stage ('Test') {
+        steps {
+            // -Dmaven.test.failure.ignore=true causes maven to ignore any failed tests & continue with further goals
+             sh 'mvn -Dmaven.test.failure.ignore=true clean validate test-compile test'
+        }
+        post {
+            always {
+                junit 'target/surefire-reports/**/*.xml'
+            }
+            success{
+                echo "tests successful"
+            }
+            failure {
+                echo "all tests failed?"
+            }
+            unstable{
+                echo "some tests failed?"
+            }
+        }
+    }
+  }
+}
