@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
 
     @Test
+    @Disabled
     public void exampleTest_AlwaysSucceeds(){
 
         // given
