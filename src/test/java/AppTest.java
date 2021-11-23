@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
 
     @Test
-    public void exampleTest_AlwaysSucceeds(){
+    public void exampleTest_AlwaysSucceeds() {
 
         // given
         boolean input = true;
@@ -14,7 +14,7 @@ class AppTest {
         // when
         // then
         assertTrue(input, "This test is an example and should always pass");
-
+    }
 
     @Test
     @Disabled

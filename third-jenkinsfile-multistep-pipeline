@@ -37,8 +37,7 @@ pipeline{
                 echo "tests successful"
             }
             failure {
-                //does not come into effect if all tests fail! Maybe comes into effect if tests can't be compiled?
-                echo "tests couldn't be compiled?"
+                echo "tests couldn't be compiled"
             }
             unstable{
                 echo "some tests failed?"
