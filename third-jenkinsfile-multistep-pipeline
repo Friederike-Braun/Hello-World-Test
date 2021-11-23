@@ -53,7 +53,7 @@ pipeline{
         stage('Nexus Result'){
             steps {
                 script {
-                    def consoleLog = currentBuild.getLog(10000);
+                    def consoleLog = currentBuild.getLog();
                     def result = consoleLog.find { it.contains('Failed to deploy artifacts') }
                     if (result) {
                         error (result)
