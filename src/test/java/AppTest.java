@@ -17,7 +17,6 @@ class AppTest {
     }
 
     @Test
-    @Disabled
     public void exampleTest_AlwaysFails(){
 
         // given
