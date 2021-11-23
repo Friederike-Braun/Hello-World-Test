@@ -53,6 +53,11 @@ pipeline{
         stage('Nexus Result'){
             steps {
                 script {
+                    if(manager.logContains("Failed")) {
+                    error('Failed')
+                    }
+
+
                     if(manager.logContains("Failed to deploy artifacts")) {
                         error('Failed to deploy artifacts')
                     }
