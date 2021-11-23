@@ -50,6 +50,19 @@ pipeline{
                 version: '1.0-SNAPSHOT'
             }
         }
+        steps {
+            script {
+                def consoleLog = currentBuild.rawBuild.getLog(10000);
+                def result = consoleLog.find { it.contains('Failed to deploy artifacts') }
+                if (result) {
+                    error (result)
+                }
+                result = consoleLog.find { it.contains('Failed to retrieve remote metadata') }
+                if (result) {
+                    error (result)
+                }
+            }
+        }
   }
   post{
     failure {
