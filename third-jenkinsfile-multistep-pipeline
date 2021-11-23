@@ -21,7 +21,6 @@ pipeline{
                 junit 'target/surefire-reports/**/*.xml'
             }
             unstable {
-                //sh 'mvn clean'
                 error('Build unstable, at least one test failed. Aborting pipeline')
             }
         }
