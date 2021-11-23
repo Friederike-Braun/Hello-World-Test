@@ -7,19 +7,19 @@ pipeline{
 
   stages{
     stage('Initialize'){
-        steps{
+        steps {
             echo "PATH = ${M2_HOME}/bin:${PATH}"
             echo "M2_HOME = /opt/maven"
         }
     }
     stage('Clean'){
-        step{
+        steps {
             echo "Maven clean"
             //sh 'mvn clean'
         }
     }
     stage('Build'){
-        step{
+        steps {
             echo "some build step"
             //sh 'mvn compile'
         }
