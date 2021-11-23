@@ -9,14 +9,13 @@ pipeline{
     stage('Build'){
         steps {
             echo "some build step"
-            sh 'mvn compile'
+            sh 'mvn compile test-compile'
         }
         post{
             success {
                 echo "compile successful"
             }
             failure {
-                //automatically skips all other stages after this
                 echo "compile failed"
                 sh 'mvn clean'
             }
@@ -34,14 +33,9 @@ pipeline{
             success {
                 echo "tests successful"
             }
-            failure {
-                echo "test classes couldn't be compiled"
-                sh 'mvn clean'
-            }
             unstable {
-                echo "some tests failed"
                 sh 'mvn clean'
-                error('Aborting pipeline because tests failed')
+                error('Build unstable, at least one test failed. Aborting pipeline')
             }
         }
     }
