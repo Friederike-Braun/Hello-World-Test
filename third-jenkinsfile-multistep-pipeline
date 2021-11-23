@@ -37,7 +37,7 @@ pipeline{
                     [
                         artifactId: 'Hello-World-Test',
                         classifier: '',
-                        file: 'target/Hello-World-Test-1.0-SNAPSHOT',
+                        file: 'target/Hello-World-Test-1.0-SNAPSHOT.jar',
                         type: 'jar'
                     ]
                 ],
