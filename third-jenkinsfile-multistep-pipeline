@@ -13,12 +13,16 @@ pipeline{
         }
     }
     stage('Clean'){
-        echo "Maven clean"
-        //sh 'mvn clean'
+        step{
+            echo "Maven clean"
+            //sh 'mvn clean'
+        }
     }
     stage('Build'){
-        echo "some build step"
-        //sh 'mvn compile'
+        step{
+            echo "some build step"
+            //sh 'mvn compile'
+        }
     }
     stage ('Test') {
         steps {
