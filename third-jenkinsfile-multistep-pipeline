@@ -50,7 +50,7 @@ pipeline{
                 version: '1.0-SNAPSHOT'
             }
         }
-        stage('Nexus Result){
+        stage('Nexus Result'){
             steps {
                 script {
                     def consoleLog = currentBuild.rawBuild.getLog(10000);
