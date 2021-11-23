@@ -21,7 +21,7 @@ pipeline{
     stage('Build'){
         steps {
             echo "some build step"
-            sh 'mvn compile'
+            sh 'mvn compile test-compile'
         }
         post{
             success {
