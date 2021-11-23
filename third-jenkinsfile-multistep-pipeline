@@ -21,13 +21,14 @@ pipeline{
     stage('Build'){
         steps {
             echo "some build step"
-            sh 'mvn compile test-compile'
+            sh 'mvn compile'
         }
         post{
             success {
                 echo "compile successful"
             }
             failure {
+                //automatically skips all other stages after this
                 echo "compile failed"
             }
         }
@@ -45,10 +46,10 @@ pipeline{
                 echo "tests successful"
             }
             failure {
-                echo "tests couldn't be compiled"
+                echo "test classes couldn't be compiled"
             }
             unstable {
-                echo "some tests failed?"
+                echo "some tests failed"
             }
         }
     }
