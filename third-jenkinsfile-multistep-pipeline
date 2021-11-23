@@ -46,7 +46,7 @@ pipeline{
                 nexusUrl: 'nexus.haeger-consulting.de:8081',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
-                repository: 'https://nexus.haeger-consulting.de/repository/friederike-maven-hello-world/',
+                repository: 'friederike-maven-hello-world',
                 version: '1.0-SNAPSHOT'
             }
         }
