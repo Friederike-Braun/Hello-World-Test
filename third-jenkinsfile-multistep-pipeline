@@ -8,15 +8,10 @@ pipeline{
   stages{
     stage('Build'){
         steps {
-            echo "some build step"
             sh 'mvn compile test-compile'
         }
         post{
-            success {
-                echo "compile successful"
-            }
             failure {
-                echo "compile failed"
                 sh 'mvn clean'
             }
         }
@@ -30,9 +25,6 @@ pipeline{
             always {
                 junit 'target/surefire-reports/**/*.xml'
             }
-            success {
-                echo "tests successful"
-            }
             unstable {
                 sh 'mvn clean'
                 error('Build unstable, at least one test failed. Aborting pipeline')
@@ -41,7 +33,6 @@ pipeline{
     }
     stage('Package'){
         steps {
-            echo "clean then package"
             sh 'mvn clean -Dmaven.test.skip package'
         }
     }
