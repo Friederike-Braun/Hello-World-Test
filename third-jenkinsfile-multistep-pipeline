@@ -9,7 +9,7 @@ pipeline{
     stage('Build'){
         steps {
             echo 'Building the application'
-            sh 'mvn compile test-compile'
+            sh 'mvn clean compile test-compile'
         }
     }
     stage ('Test') {
@@ -30,8 +30,8 @@ pipeline{
     }
     stage('Package'){
         steps {
-            echo 'Cleaning & packaging the application'
-            sh 'mvn clean -Dmaven.test.skip package'
+            echo 'Packaging the application'
+            sh 'mvn -Dmaven.test.skip package'
         }
     }
     stage('Push to Nexus'){
@@ -70,12 +70,6 @@ pipeline{
                 }
             }
         }
-    }
-  }
-  post{
-    failure {
-        echo 'pipeline failed, cleaning the application before shutdown'
-        sh 'mvn clean'
     }
   }
 }
