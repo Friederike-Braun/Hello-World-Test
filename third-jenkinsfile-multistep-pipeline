@@ -58,11 +58,11 @@ pipeline{
                     }
 
 
-                    if(manager.logContains("Failed to deploy artifacts*")) {
+                    if(manager.logContains(".*Failed to deploy artifacts.*")) {
                         error('Failed to deploy artifacts')
                     }
 
-                    if(manager.logContains("Failed to retrieve remote metadata*")) {
+                    if(manager.logContains(".*Failed to retrieve remote metadata.*")) {
                         error('Failed to retrieve remote metadata')
                     }
                     //error('does this happen?')
