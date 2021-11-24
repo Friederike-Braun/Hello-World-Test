@@ -34,45 +34,42 @@ pipeline{
         }
     }
     stage('Push to Nexus'){
-            steps {
-                echo 'Pushing the packaged application to Nexus Repository Manager'
+        steps {
+            echo 'Pushing the packaged application to Nexus Repository Manager'
 
-                //generated using jenkins snippet generator
-                nexusArtifactUploader artifacts: [
-                    [
-                        artifactId: 'Hello-World-Test',
-                        classifier: '',
-                        file: 'target/Hello-World-Test-1.0-SNAPSHOT.jar',
-                        type: 'jar'
-                    ]
-                ],
-                credentialsId: 'Diego-Nexus',
-                groupId: 'org.example',
-                nexusUrl: 'nexus.haeger-consulting.de',
-                nexusVersion: 'nexus3',
-                protocol: 'http',
-                repository: 'friederike-maven-hello-world',
-                version: '1.0-SNAPSHOT'
-            }
-        }
-        stage('Nexus Result'){
-            steps {
-                echo 'Checking that push to nexus was successful'
-                script {
-                    if(manager.logContains(".*Failed to retrieve remote metadata.*")) {
-                        echo 'Push to nexus failed'
-                        error('Failed to retrieve remote metadata')
-                    }
-                    else if(manager.logContains(".*Failed.*")) {
-                        echo 'Push to nexus failed'
-                        error('Failed due to unknown error, check logs in detail')
-                    }
-                    else {
-                        echo 'Push to nexus was successful'
-                    }
+            //generated using jenkins snippet generator
+            nexusArtifactUploader artifacts: [
+                [
+                    artifactId: 'Hello-World-Test',
+                    classifier: '',
+                    file: 'target/Hello-World-Test-1.0-SNAPSHOT.jar',
+                    type: 'jar'
+                ]
+            ],
+            credentialsId: 'Diego-Nexus',
+            groupId: 'org.example',
+            nexusUrl: 'nexus.haeger-consulting.de',
+            nexusVersion: 'nexus3',
+            protocol: 'http',
+            repository: 'friederike-maven-hello-world',
+            version: '1.0-SNAPSHOT'
+
+            echo 'Checking if push to nexus was successful'
+            script {
+                if(manager.logContains(".*Failed to retrieve remote metadata.*")) {
+                    echo 'Push to nexus failed'
+                    error('Failed to retrieve remote metadata')
+                }
+                else if(manager.logContains(".*Failed.*")) {
+                    echo 'Push to nexus failed'
+                    error('Failed due to unknown error, check logs in detail')
+                }
+                else {
+                    echo 'Push to nexus was successful'
                 }
             }
         }
+    }
   }
   post{
     failure {
