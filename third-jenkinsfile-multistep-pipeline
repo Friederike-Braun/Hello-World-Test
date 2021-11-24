@@ -8,11 +8,13 @@ pipeline{
   stages{
     stage('Build'){
         steps {
+            echo 'Building the application'
             sh 'mvn compile test-compile'
         }
     }
     stage ('Test') {
         steps {
+            echo 'Testing the application'
             // -Dmaven.test.failure.ignore=true causes maven to ignore any failed tests & continue with further goals
             sh 'mvn -Dmaven.test.failure.ignore=true test'
         }
@@ -27,11 +29,14 @@ pipeline{
     }
     stage('Package'){
         steps {
+            echo 'Cleaning & packaging the application'
             sh 'mvn clean -Dmaven.test.skip package'
         }
     }
     stage('Push to Nexus'){
             steps {
+                echo 'Pushing the packaged application to Nexus Repository Manager'
+
                 //generated using jenkins snippet generator
                 nexusArtifactUploader artifacts: [
                     [
@@ -52,6 +57,7 @@ pipeline{
         }
         stage('Nexus Result'){
             steps {
+                echo 'Checking that push to nexus was successful'
                 script {
                     if(manager.logContains(".*Failed to retrieve remote metadata.*")) {
                         error('Failed to retrieve remote metadata')
@@ -65,6 +71,7 @@ pipeline{
   }
   post{
     failure {
+        echo 'pipeline failed, cleaning the application before shutdown'
         sh 'mvn clean'
     }
   }
