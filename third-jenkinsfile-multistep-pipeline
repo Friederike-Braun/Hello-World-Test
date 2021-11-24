@@ -31,7 +31,7 @@ pipeline{
     stage('Package'){
         steps {
             echo 'Cleaning & packaging the application'
-            sh 'mvn clean -Dmaven.test.skip package'
+            sh 'mvn -Dmaven.test.skip package'
         }
     }
     stage('Push to Nexus'){
@@ -72,10 +72,10 @@ pipeline{
         }
     }
   }
-  post{
+  /*post{
     failure {
         echo 'pipeline failed, cleaning the application before shutdown'
         sh 'mvn clean'
     }
-  }
+  }*/
 }
