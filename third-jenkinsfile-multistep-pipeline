@@ -57,11 +57,11 @@ pipeline{
             echo 'Checking if push to nexus was successful'
             script {
                 if(manager.logContains(".*Failed to retrieve remote metadata.*")) {
-                    echo 'Push to nexus failed'
+                    echo 'Push to nexus failed; Cause: Failed to retrieve remote metadata'
                     error('Failed to retrieve remote metadata')
                 }
                 else if(manager.logContains(".*Failed.*")) {
-                    echo 'Push to nexus failed'
+                    echo 'Push to nexus failed; Cause unknown, check logs in detail'
                     error('Failed due to unknown error, check logs in detail')
                 }
                 else {
