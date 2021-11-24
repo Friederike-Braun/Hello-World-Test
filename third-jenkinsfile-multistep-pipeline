@@ -20,7 +20,7 @@ pipeline{
         }
         post {
             always {
-                echo 'Build stable, all tests passed'
+                echo 'Build stable, all tests passed; test results archived in "target/surefire-reports/**/*.xml"'
                 junit 'target/surefire-reports/**/*.xml'
             }
             unstable {
