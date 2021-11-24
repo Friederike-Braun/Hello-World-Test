@@ -65,7 +65,7 @@ pipeline{
                     if(manager.logContains("Failed to retrieve remote metadata*")) {
                         error('Failed to retrieve remote metadata')
                     }
-                    error('does this happen?')
+                    //error('does this happen?')
                 }
             }
         }
