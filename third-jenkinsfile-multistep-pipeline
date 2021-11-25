@@ -43,7 +43,7 @@ pipeline{
     stage('Package'){
         steps {
             echo 'Packaging the application'
-            sh 'mvn install'
+            sh 'mvn -Dmaven.test.skip install'
             //sh 'mvn -Dmaven.test.skip package'
         }
     }
