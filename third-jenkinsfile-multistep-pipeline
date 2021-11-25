@@ -49,24 +49,6 @@ pipeline{
     stage('Push to Nexus'){
         steps {
             echo 'Pushing the packaged application to Nexus Repository Manager'
-
-            //generated using jenkins snippet generator
-            /*nexusArtifactUploader artifacts: [
-                [
-                    artifactId: 'Hello-World-Test',
-                    classifier: '',
-                    file: 'target/Hello-World-Test-1.0-SNAPSHOT.jar',
-                    type: 'jar'
-                ]
-            ],
-            credentialsId: 'Diego-Nexus',
-            groupId: 'org.example',
-            nexusUrl: 'nexus.haeger-consulting.de',
-            nexusVersion: 'nexus3',
-            protocol: 'http',
-            repository: 'friederike-maven-hello-world',
-            version: '1.0-SNAPSHOT'*/
-
             sh 'mvn install'
 
             script {
