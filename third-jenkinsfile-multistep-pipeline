@@ -43,13 +43,14 @@ pipeline{
     stage('Package'){
         steps {
             echo 'Packaging the application'
-            sh 'mvn -Dmaven.test.skip package'
+            sh 'mvn install'
+            //sh 'mvn -Dmaven.test.skip package'
         }
     }
     stage('Push .jar to Nexus'){
         steps {
             echo 'Pushing the  application packaged as .jar to Nexus Repository Manager'
-            sh 'mvn install'
+            //sh 'mvn install'
 
             script {
                 // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
