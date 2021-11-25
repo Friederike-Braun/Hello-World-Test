@@ -70,8 +70,11 @@ pipeline{
             sh 'mvn install'
 
             script {
+                echo 'start of upload script, before read POM'
                 // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
                 pom = readMavenPom file: "pom.xml";
+
+                echo 'after readPOM step; pom path is: ${pom.path}'
 
                 // Find built artifact under target folder
                 filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
